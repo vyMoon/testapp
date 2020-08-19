@@ -20,6 +20,10 @@ export default class Main extends React.Component {
     }
 
     componentDidMount() {
+        this.authorize();
+    }
+
+    authorize() {
         const search = window.location.search;
 
         if (search && search.includes('code') && !this.state.accessToken) {
@@ -42,6 +46,7 @@ export default class Main extends React.Component {
                         this.api.getUserInformation(this.state.access.token)
                             .then(userInformation => {
                                 const { display_name, id } = userInformation;
+                                console.log(userInformation);
                                 this.setState({
                                     user: {
                                         id: id,

@@ -1,0 +1,28 @@
+.playlist {
+  display: flex;
+  justify-content: flex-end;
+  background-color: rgb(38, 6, 39);
+  border-radius: 8px;
+  padding: 18px;
+  margin-bottom: 18px;
+
+  &__image {
+    width: 20vh;
+    height: 20vh;
+    border-radius: 5px;
+  }
+
+  &__header {
+    color: bisque;
+    font-size: 26px;
+    margin-bottom: 18px;
+  }
+
+  &__information {
+    padding-right: 28px;
+    text-align: right;
+    p {
+      margin-bottom: 8px;
+    }
+  }
+}
