@@ -1,0 +1,14 @@
+.music {
+  padding-left: 360px;
+  &__search {
+    position: fixed;
+    top: 70px;
+    left: 16px;
+  }
+
+  &__error-message {
+    font-size: 20px;
+    margin-top: 16px;
+    color: rgb(248, 83, 83);
+  }
+}

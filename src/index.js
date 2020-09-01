@@ -1,13 +1,43 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+import { Provider } from 'react-redux';
+import { createStore, combineReducers } from 'redux';
+import { userReducer, searchReducer } from './reducers';
+
+const store = createStore(combineReducers({
+  userInformation: userReducer,
+  search: searchReducer,
+}));
+
+// const render = () => {
+//   ReactDOM.render(
+//     <React.StrictMode>
+//       <BrowserRouter>
+//         <Provider store={store} >
+//           <App />
+//         </Provider>
+//       </BrowserRouter>
+//     </React.StrictMode>,
+//     document.getElementById('root')
+//   );
+// }
+
+// render();
+// store.subscribe(render);
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Provider store={store} >
+    <React.StrictMode>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </React.StrictMode>
+  </Provider>,
   document.getElementById('root')
 );
 

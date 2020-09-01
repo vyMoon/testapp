@@ -1,0 +1,20 @@
+.aritst-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 200px;
+  // border: 1px solid red;
+  padding: 8px;
+  margin-bottom: 16px;
+  margin-left: 16px;
+  margin-right: 16px;
+  // background-color: rgb(2, 18, 37);
+  border-radius: 8px;
+  text-align: center;
+
+  &__image {
+    width: 150px;
+    border-radius: 8px;
+  }
+}

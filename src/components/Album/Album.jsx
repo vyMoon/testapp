@@ -1,28 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './Album.scss';
+import img from '../../assets/images/icons/no-camera.png';
 
-const Album = ({ albumName, link, image, releaseDate, totalTracks, artists }) => (
-  <div className='album'>
-    <img src={image} className='album__image' alt='album'></img>
-    <div className='album__information'>
-      <h3 className='album__header'>
-        <a href={link}>{albumName}</a>
-      </h3>
-        <p>Realese date: {releaseDate}</p>
-        <p>Total tracks: {totalTracks}</p>
-        <p>Artist: {artists.reduce((artists, el) => artists + `, ${el}`)}</p>
+const Album = ({ name, external_urls, images, release_date, total_tracks, artists }) => {
+  const artist = artists.map(el => {
+    return el.name
+  }).join(', ')
+  const imgSrc = images[0] ? images[0].url : img;
+  return (
+    <div className='album'>
+      <img src={imgSrc} className='album__image' alt='album'></img>
+      <div className='album__information'>
+        <h3 className='album__header'>
+          <a href={external_urls.spotify}>{name}</a>
+        </h3>
+          <p>Realese date: {release_date}</p>
+          <p>Total tracks: {total_tracks}</p>
+          <p>Artist: {artist}</p>
+      </div>
     </div>
-  </div>
-);
+  )
+};
 
 Album.propTypes = {
-  albumName: PropTypes.string,
-  link: PropTypes.string,
-  image: PropTypes.string,
-  releaseDate: PropTypes.string,
-  totalTracks: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  artists: PropTypes.arrayOf(PropTypes.string)
+  albnameumName: PropTypes.string,
+  uri: PropTypes.string,
+  images: PropTypes.array,
+  release_date: PropTypes.string,
+  total_tracks: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  artists: PropTypes.arrayOf(PropTypes.object)
 }
 
 export default Album;

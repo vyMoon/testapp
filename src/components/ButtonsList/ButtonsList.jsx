@@ -2,21 +2,30 @@ import React from 'react';
 import RadioButton from '../Checkbox-item/CheckBox';
 import PropTypes from 'prop-types';
 import './ButtonsList.scss';
+import { connect } from 'react-redux';
 
-const ButtonsList = ({ buttonsList, name, onChangeHandler, checkedValue, header }) => (
-  <div className='buttons-list'>
-    <h4 className='buttons-list__header'>{header}</h4>
-    {buttonsList.map(el => {
-       return <RadioButton 
-        key={el}
-        name={name}
-        value={el}
-        onChangeHandler={onChangeHandler}
-        isChecked={checkedValue === el}
-       />
-    })}
-  </div>
-);
+const ButtonsList = (props) => {
+  const { buttonsList, name, changeField, checkedValue, header } = props;
+  // console.log(props)
+  const onChange = (event) => {
+    // console.log(event.target.value, name);
+    changeField({type: name, value: event.target.value});
+  }
+  return (
+    <div className='buttons-list'>
+      <h4 className='buttons-list__header'>{header}</h4>
+      {buttonsList.map(el => {
+        return <RadioButton 
+          key={el}
+          name={name}
+          value={el}
+          onChangeHandler={onChange}
+          isChecked={props.search[name] === el}
+        />
+      })}
+    </div>
+  )
+};
 
 ButtonsList.propTypes = {
   buttonsList: PropTypes.arrayOf(PropTypes.string),
@@ -26,4 +35,12 @@ ButtonsList.propTypes = {
   header: PropTypes.string
 }
 
-export default ButtonsList;
+const propsMap = ({search}) => ({
+  search
+});
+
+const actionMap = (dispatch) => ({
+  changeField: (action) => dispatch(action)
+})
+
+export default connect(propsMap, actionMap)(ButtonsList);

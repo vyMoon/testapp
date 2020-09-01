@@ -1,74 +1,55 @@
 import React from 'react';
-import { SpotifyApi } from '../../SpotifyApi';
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
+// import { SpotifyApi } from '../../SpotifyApi';
+import { connect } from 'react-redux';
 
-export default class Main extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            access: {
-                token: '',
-                refreshToken: '',
-                tokenType: ''
-            },
-            user: {
-                name: '',
-                id: ''
-            }
-        };
+import Authorisation from '../Authorisation/Authorisation.jsx';
+import User from '../User/User';
+import Music from '../Music/Music';
 
-        this.api = new SpotifyApi();
-    }
-
-    componentDidMount() {
-        this.authorize();
-    }
-
-    authorize() {
-        const search = window.location.search;
-
-        if (search && search.includes('code') && !this.state.accessToken) {
-            const code = search.split('=')[1]
-            this.api.getAccessToken(code)
-                .then(credentials => {
-                    if (!this.state.access.token) {
-                        const { access_token, refresh_token, token_type } = credentials;
-                        this.setState({
-                            access: {
-                                token: access_token,
-                                refreshToken: refresh_token,
-                                tokenType: token_type
-                            }
-                        });
-                    }
-                })
-                .then(() => {
-                    if (this.state.access.token) {
-                        this.api.getUserInformation(this.state.access.token)
-                            .then(userInformation => {
-                                const { display_name, id } = userInformation;
-                                console.log(userInformation);
-                                this.setState({
-                                    user: {
-                                        id: id,
-                                        name: display_name
-                                    }
-                                });
-                            })
-                    }
-
-                })
-                .catch(err => console.log(err))
-        }
-    }
+const Main = withRouter(class extends React.Component {
+    // constructor() {
+    //     super();
+    //     this.api = new SpotifyApi();
+    // }
 
     render() {
+        // console.log(this.props)
         return (
             <>
-                {this.state.user.name
-                    ? <p>Hi {this.state.user.name}</p>
-                    : <p><a href={this.api.authLink}>login via spotify</a></p>
-                }
+            <Switch>
+                <Route exact path='/' render={() => (
+                    this.props.userInformation.user === null ? <Redirect to='/authorisation' /> : <Redirect to='/music' />
+                )} />
+                <Route path='/user' render={() => (
+                    this.props.userInformation.user === null ? <Redirect to='/authorisation' /> : <User/>
+                )} />
+                <Route path='/music' render={() => (
+                    this.props.userInformation.user ? <Music /> : <Redirect to='/authorisation' />
+                )} />
+                <Route path='/authorisation' render={() => (
+                    this.props.userInformation.user ? <Redirect to='/music' /> : <Authorisation />
+                )} />
+            </Switch>
             </>
         )
     }
-}
+})
+
+const propsMap = ({userInformation, search}) => ({
+    userInformation,
+    search,
+});
+
+// const actionsMap = (dispatch) => ({
+//     login: (user) => dispatch({
+//         type: 'user',
+//         user: user,
+//     }),
+//     onTokens: (tokens) => dispatch({
+//         type: 'tokens',
+//         tokens: tokens
+//     }) 
+// })
+
+export default connect(propsMap)(Main);

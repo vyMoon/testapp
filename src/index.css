@@ -33,12 +33,11 @@ a {
 
 .container {
   max-width: 1000px;
-  margin: auto;
   padding-top: 18px;
 }
 
 .container--tiles {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 }

@@ -4,9 +4,6 @@ const HOCLister = (ListingComponent, containerClassName = '') => {
   return class Component extends React.Component {
     constructor(props) {
       super(props);
-      this.state = {
-        list: props.list
-      }
 
       this.containerClassName = containerClassName;
       this.defaultContainerClassName = 'container'
@@ -19,7 +16,7 @@ const HOCLister = (ListingComponent, containerClassName = '') => {
       return (
         <div className='list'>
           <div className={ClassNameContainer}>
-            {this.state.list.map((el, index) => {
+            {this.props.list.map((el, index) => {
               return (
                 <ListingComponent 
                   key={index}

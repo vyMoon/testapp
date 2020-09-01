@@ -2,16 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './PlayList.scss';
 
-const PlayList = ({ name, link, image, totalTracks, ownerName }) => (
+const PlayList = ({ name, external_urls, images, tracks, owner }) => (
   <div className='playlist'>
     <div className='playlist__information'>
       <h3 className='playlist__header'>
-        <a href={link}>{name}</a>
+        <a href={external_urls.spotify}>{name}</a>
       </h3>
-        <p>Owner: {ownerName}</p>
-        <p>Total tracks: {totalTracks}</p>
+        <p>Owner: {owner.display_name}</p>
+        <p>Total tracks: {tracks.total}</p>
     </div>
-    <img src={image} className='playlist__image' alt='playlist'></img>
+    <img src={images[0].url} className='playlist__image' alt='playlist'></img>
   </div>
 );
 
