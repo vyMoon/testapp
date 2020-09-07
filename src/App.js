@@ -1,26 +1,37 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { connect } from 'react-redux';
 
-function App() {
+import './App.css';
+import Main from './components/Main/Main';
+import Header from './components/Header/Header';
+// import Album from './components/Album/Album';
+// import AlbumList from './components/AlbumList/AlbumList';
+// import PlayList from './components/PlayList/PlayList';
+// import PlaylistsList from './components/PlaylistsList/PlaylistsList';
+// import Track from './components/Track/Track';
+// import TracksList from './components/TracksList/TracksList';
+// import SearchFrom from './components/SearchForm/SearchForm';
+// import { testAlbums, plays, tracks } from './mock';
+
+function App(props) {
+  // console.log(props)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <Header />
+      <main>
+        <Main />
+      </main>
+    </>
+  )
 }
 
-export default App;
+const propMaps = ({user}) => ({
+  user
+});
+
+const actionsMaps = (dispatch) => ({
+  login: (user) => dispatch({type: 'auth', user: user}),
+  logout: () => dispatch({type: 'logout'})
+})
+
+export default connect(propMaps, actionsMaps)(App);

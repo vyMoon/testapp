@@ -1,0 +1,33 @@
+.album {
+  display: flex;
+  // background-color: rgb(7, 6, 39);
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,125,150,1) 100%);
+  border-radius: 8px;
+  padding: 18px;
+  margin-bottom: 18px;
+
+  &__image {
+    width: 30vh;
+    height: 30vh;
+    border-radius: 5px;
+    border-radius: 50%;
+    transition: 0.25s;
+  }
+
+  &__header {
+    color: bisque;
+    font-size: 26px;
+    margin-bottom: 18px;
+  }
+
+  &__information {
+    padding-left: 28px;
+    p {
+      margin-bottom: 8px;
+    }
+  }
+}
+
+.album:hover ~ img {
+  border-radius: 15px;
+}

@@ -1,0 +1,12 @@
+.radio-button {
+  margin: 15px;
+  cursor: pointer;
+  
+  &__input {
+    display: none;
+  }
+
+  &--checked {
+    color: orange;
+  }
+}

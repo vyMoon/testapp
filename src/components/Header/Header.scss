@@ -1,0 +1,49 @@
+.header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  width: 100vw;
+  color: beige;
+  background-color: black;
+  z-index: 10;
+  
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    max-width: 1000px;
+    margin: auto;
+    padding-right: 8px;
+    padding-left: 8px;
+  }
+
+  &__logo a {
+    text-decoration: none;
+    color: beige;
+  }
+
+  &__user-information {
+    position: relative;
+    padding-right: 35px;
+    cursor: pointer;
+    color: beige;
+    text-decoration: none;
+  }
+
+  &__user-information:after {
+    position: absolute;
+    top: -9px;
+    right: 0;
+    display: block;
+    content: '';
+    width: 30px;
+    height: 35px;
+    background-color: rgb(250, 225, 0);
+    mask-image: url('../../assets/images/icons/account_circle-24px.svg');
+    mask-repeat: no-repeat;
+    mask-position: center;
+  }
+}
